@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Startup Prediction</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #1f1c2c, #928dab);
+      color: #fff;
+      text-align: center;
+      padding: 50px;
+      margin: 0;
+    }
+
+    h2 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      animation: fadeInDown 1.5s ease-in-out;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 15px;
+      display: inline-block;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+      animation: zoomIn 1.5s ease-out;
+    }
+
+    input {
+      margin: 10px;
+      padding: 10px;
+      width: 250px;
+      border: none;
+      border-radius: 8px;
+      outline: none;
+      transition: transform 0.3s, background 0.3s;
+    }
+
+    input:focus {
+      transform: scale(1.05);
+      background: #f0f0f0;
+    }
+
+    button {
+      background: #ff6f61;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      color: #fff;
+      margin-top: 15px;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    button:hover {
+      background: #ff856f;
+      transform: scale(1.1);
+    }
+
+    #result {
+      margin-top: 25px;
+      font-size: 22px;
+      font-weight: bold;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    /* Spinner styling */
+    .spinner {
+      border: 6px solid rgba(255,255,255,0.2);
+      border-top: 6px solid #ff6f61;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+      display: none;
+    }
+
+    /* Animations */
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes zoomIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    /* Success/Failure colors */
+    .safe {
+      color: #4CAF50; /* green */
+    }
+    .failed {
+      color: #FF5252; /* red */
+    }
+  </style>
+</head>
+<body>
+  <h2>🚀 Startup Success Predictor</h2>
+  <div class="card">
+    <form id="predictForm">
+      <input type="number" id="funding" placeholder="Total Funding"><br>
+      <input type="number" id="rounds" placeholder="Funding Rounds"><br>
+      <input type="number" id="city" placeholder="City Encoded"><br>
+      <input type="number" id="industry" placeholder="Industry Encoded"><br>
+      <button type="button" onclick="predict()">Predict</button>
+    </form>
+
+    <!-- Spinner -->
+    <div class="spinner" id="spinner"></div>
+
+    <p id="result"></p>
+  </div>
+
+  <script>
+    async function predict() {
+      const spinner = document.getElementById("spinner");
+      const result = document.getElementById("result");
+
+      // Show spinner, clear old result
+      spinner.style.display = "block";
+      result.innerText = "";
+
+      const url = "http://127.0.0.1:8000/predict";
+
+;
+      const params = new URLSearchParams({
+        total_funding: document.getElementById("funding").value,
+        funding_rounds: document.getElementById("rounds").value,
+        city_encoded: document.getElementById("city").value,
+        industry_encoded: document.getElementById("industry").value
+      });
+
+      try {
+        const response = await fetch(url + "?" + params, { method: "POST" });
+        const data = await response.json();
+
+        // Apply color effect
+        if (data.prediction === "Safe") {
+          result.innerHTML = "Prediction: <span class='safe'>Safe ✅</span>";
+        } else {
+          result.innerHTML = "Prediction: <span class='failed'>Failed ❌</span>";
+        }
+      } catch (error) {
+        result.innerText = "Error: Could not connect to backend.";
+      } finally {
+        // Hide spinner after response
+        spinner.style.display = "none";
+      }
+    }
+  </script>
+</body>
+</html>

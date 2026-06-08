@@ -1,0 +1,60 @@
+{
+  "city_map": {
+    "Ahmedabad": 0,
+    "Bangalore": 1,
+    "Chennai": 2,
+    "Delhi": 3,
+    "Gurgaon": 4,
+    "Hyderabad": 5,
+    "Indore": 6,
+    "Jaipur": 7,
+    "Kochi": 8,
+    "Kolkata": 9,
+    "Mumbai": 10,
+    "Noida": 11,
+    "Other": 12,
+    "Patna": 13,
+    "Unknown": 14,
+    "Visakhapatnam": 15
+  },
+  "industry_map": {
+    "AgriTech": 0,
+    "E-Commerce": 1,
+    "EdTech": 2,
+    "FinTech": 3,
+    "FoodTech": 4,
+    "HealthTech": 5,
+    "Logistics": 6,
+    "Manufacturing": 7,
+    "Media": 8,
+    "Other": 9,
+    "RealEstate": 10,
+    "Services": 11,
+    "Tech/SaaS": 12,
+    "Travel": 13
+  },
+  "features": [
+    "TotalFunding",
+    "FundingRounds",
+    "FundingPerRound",
+    "LogFunding",
+    "LogFundingPerRound",
+    "StageEncoded",
+    "CityEncoded",
+    "IndustryEncoded",
+    "IsMajorCity",
+    "IsTechIndustry",
+    "FundingBand"
+  ],
+  "stage_map": {
+    "Pre-seed/Angel": 1,
+    "Seed": 2,
+    "Bridge": 3,
+    "Series A": 4,
+    "Series B": 5,
+    "Series C": 6,
+    "Late Stage": 7,
+    "Private Equity": 8,
+    "IPO": 9
+  }
+}

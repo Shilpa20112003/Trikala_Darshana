@@ -1,0 +1,41 @@
+{
+  "best_model": "Random Forest",
+  "features": [
+    "TotalFunding",
+    "FundingRounds",
+    "FundingPerRound",
+    "LogFunding",
+    "LogFundingPerRound",
+    "StageEncoded",
+    "CityEncoded",
+    "IndustryEncoded",
+    "IsMajorCity",
+    "IsTechIndustry",
+    "FundingBand"
+  ],
+  "random_forest": {
+    "accuracy": 0.8685,
+    "f1": 0.9182,
+    "precision": 0.9475,
+    "recall": 0.8908,
+    "roc_auc": 0.9046
+  },
+  "xgboost": {
+    "accuracy": 0.838,
+    "f1": 0.8962,
+    "precision": 0.9558,
+    "recall": 0.8437,
+    "roc_auc": 0.907
+  },
+  "logistic_regression": {
+    "accuracy": 0.586,
+    "f1": 0.6823,
+    "precision": 0.938,
+    "recall": 0.5362,
+    "roc_auc": 0.6581
+  },
+  "cv_mean_f1": 0.8372,
+  "cv_std_f1": 0.0028,
+  "train_rows": 80178,
+  "test_rows": 12087
+}
